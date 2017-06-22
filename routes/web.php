@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'TodoController@index');
-Route::get('/create', 'TodoController@create');
-Route::get('/update', 'TodoController@update');
+Route::match(['get', 'post'], 'create', 'TodoController@create');
+Route::match(['get', 'post'], 'edit/{id}', 'TodoController@edit');
+Route::post('delete/{id}', 'TodoController@delete');

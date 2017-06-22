@@ -2,6 +2,6 @@
 
 <ul>
 @foreach ($entries as $entry)
-    <li><a href="/update">{{$entry->description}}</a></li>
+    <li><a href="/edit/{{$entry->id}}">{{$entry->description}}</a></li>
 @endforeach
 </ul>

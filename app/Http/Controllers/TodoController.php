@@ -16,6 +16,9 @@ class TodoController extends Controller
 	public function create(Request $request)
 	{
 		if($request->isMethod('post')){
+			$this->validate($request, [
+                'description' => 'required'
+            ]);
             $TodoEntry = new Todo;
             $TodoEntry->description = $request->input('description');
             $TodoEntry->save();
@@ -24,16 +27,19 @@ class TodoController extends Controller
         return view('create');
 	}
 
-	public function update($id, Request $request)
+	public function edit($id, Request $request)
 	{
 		if($request->isMethod('post')){
+			$this->validate($request, [
+                'description' => 'required'
+            ]);
             $TodoEntry = Todo::find($id);
-            $TodoEntry->name = $request->input('name');
+            $TodoEntry->description = $request->input('description');
             $TodoEntry->save();
             return redirect('/');
         }
         $TodoEntry = Todo::find($id);
-        return view('update', ['basegroup' => $basegroup]);
+        return view('edit', ['TodoEntry' => $TodoEntry]);
 	}
 
 	public function delete($id)
